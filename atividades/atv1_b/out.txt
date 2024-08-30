@@ -1,0 +1,90 @@
+Insira a nota do aluno 1: Insira a frequencia do aluno 1: Insira a nota do aluno 2: Insira a frequencia do aluno 2: Insira a nota do aluno 3: Insira a frequencia do aluno 3: Insira a nota do aluno 4: Insira a frequencia do aluno 4: Insira a nota do aluno 5: Insira a frequencia do aluno 5: Insira a nota do aluno 6: Insira a frequencia do aluno 6: Insira a nota do aluno 7: Insira a frequencia do aluno 7: Insira a nota do aluno 8: Insira a frequencia do aluno 8: Insira a nota do aluno 9: Insira a frequencia do aluno 9: Insira a nota do aluno 10: Insira a frequencia do aluno 10: Insira a nota do aluno 11: Insira a frequencia do aluno 11: Insira a nota do aluno 12: Insira a frequencia do aluno 12: Insira a nota do aluno 13: Insira a frequencia do aluno 13: Insira a nota do aluno 14: Insira a frequencia do aluno 14: Insira a nota do aluno 15: Insira a frequencia do aluno 15: Insira a nota do aluno 16: Insira a frequencia do aluno 16: Insira a nota do aluno 17: Insira a frequencia do aluno 17: Insira a nota do aluno 18: Insira a frequencia do aluno 18: Insira a nota do aluno 19: Insira a frequencia do aluno 19: Insira a nota do aluno 20: Insira a frequencia do aluno 20: Insira a nota do aluno 21: Insira a frequencia do aluno 21: Insira a nota do aluno 22: Insira a frequencia do aluno 22: Insira a nota do aluno 23: Insira a frequencia do aluno 23: Insira a nota do aluno 24: Insira a frequencia do aluno 24: Insira a nota do aluno 25: Insira a frequencia do aluno 25: Insira a nota do aluno 26: Insira a frequencia do aluno 26: Insira a nota do aluno 27: Insira a frequencia do aluno 27: Insira a nota do aluno 28: Insira a frequencia do aluno 28: Insira a nota do aluno 29: Insira a frequencia do aluno 29: Insira a nota do aluno 30: Insira a frequencia do aluno 30: Aluno: 0
+Aprovado
+
+Aluno: 1
+Reprovado por: frequencia
+
+Aluno: 2
+Reprovado por: nota frequencia
+
+Aluno: 3
+Reprovado por: nota 
+
+Aluno: 4
+Reprovado por: frequencia
+
+Aluno: 5
+Reprovado por: frequencia
+
+Aluno: 6
+Reprovado por: frequencia
+
+Aluno: 7
+Reprovado por: nota frequencia
+
+Aluno: 8
+Reprovado por: nota frequencia
+
+Aluno: 9
+Reprovado por: nota frequencia
+
+Aluno: 10
+Aprovado
+
+Aluno: 11
+Aprovado
+
+Aluno: 12
+Aprovado
+
+Aluno: 13
+Aprovado
+
+Aluno: 14
+Aprovado
+
+Aluno: 15
+Reprovado por: nota 
+
+Aluno: 16
+Aprovado
+
+Aluno: 17
+Reprovado por: frequencia
+
+Aluno: 18
+Reprovado por: nota frequencia
+
+Aluno: 19
+Reprovado por: nota 
+
+Aluno: 20
+Reprovado por: frequencia
+
+Aluno: 21
+Reprovado por: frequencia
+
+Aluno: 22
+Reprovado por: frequencia
+
+Aluno: 23
+Reprovado por: nota frequencia
+
+Aluno: 24
+Reprovado por: nota frequencia
+
+Aluno: 25
+Reprovado por: nota frequencia
+
+Aluno: 26
+Aprovado
+
+Aluno: 27
+Aprovado
+
+Aluno: 28
+Aprovado
+
+Aluno: 29
+Aprovado
+
