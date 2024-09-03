@@ -12,10 +12,10 @@ void read_png_file(char *filename);
 
 void write_png_file(char *filename);
 
-void process_png_file();
+void process_png_file(c_linkedl *messageBits);
 
-void hide_message(char *filename, char *message);
+void hide_message(char *inFilename, char* outFilename, char *message);
 
-void decifrar_mensagem(char *filename);
+void show_mensagem(char *filename);
 
 #endif

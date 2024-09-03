@@ -141,16 +141,97 @@ void write_png_file(char *filename) {
         png_destroy_write_struct(&png, &info);
 }
 
-void process_png_file() {
-  for(int y = 0; y < height; y++) {
+void process_png_file_hide_message(c_linkedl *messageBits) {
+
+  char write1 = 1;
+  char write0 = 255 - 1;
+
+  for(int y = 0; y < height && messageBits->tamanho; y++) {
     png_bytep row = row_pointers[y];
-    for(int x = 0; x < width; x++) {
+    for(int x = 0; x < width && messageBits->tamanho; x++) {
       png_bytep px = &(row[x * 4]);
+
+      for(int z = 0; z < 4 && messageBits->tamanho; z++){
+        
+        if(messageBits->inicio->informacoes.valor == 1){
+            px[z] = px[z] | write1;
+        }else{
+            px[z] = px[z] & write0; 
+        }
+
+        del_c_list_element(messageBits, messageBits->inicio, 1);
+
+      }
       // Do something awesome for each pixel here...
       //printf("%4d, %4d = RGBA(%3d, %3d, %3d, %3d)\n", x, y, px[0], px[1], px[2], px[3]);
     }
   }
 }
+
+
+// CONTINUE AQUI
+
+
+void process_png_file_show_message(c_linkedl *messageBits) {
+
+    char end = 1;
+
+  for(int y = 0; y < height && end; y++) {
+    png_bytep row = row_pointers[y];
+    for(int x = 0; x < width && end; x++) {
+      png_bytep px = &(row[x * 4]);
+
+      for(int z = 0; z < 4 && end; z++){
+        
+        if(messageBits->inicio->informacoes.valor == 1){
+            px[z] = px[z] | write1;
+        }else{
+            px[z] = px[z] & write0; 
+        }
+
+        del_c_list_element(messageBits, messageBits->inicio, 1);
+
+      }
+      // Do something awesome for each pixel here...
+      //printf("%4d, %4d = RGBA(%3d, %3d, %3d, %3d)\n", x, y, px[0], px[1], px[2], px[3]);
+    }
+  }
+}
+
+
+
+void hide_message(char *inFilename, char* outFilename, char *message){
+
+    // Lendo bits de frente para tras
+
+    c_linkedl messageBits = create_c_list(); 
+    c_linkedl* listAdress = &messageBits;
+    long long sizeMessage = strlen(message) + 1;
+    read_png_file(inFilename);
+
+    if(sizeMessage > height * width) abort();
+
+    for(int i1 = 0; i1 < sizeMessage; i1++){
+        for(int i2 = 7, pos = 128; i2 >= 0; i2--, pos >>= 1){
+            insert_c_list(listAdress, create_node(1 && (pos & message[i1])));
+        }
+    }
+
+    process_png_file(listAdress);
+    write_png_file(outFilename);
+
+    kill_c_list(listAdress);
+}
+
+void show_mensagem(char *filename){
+    c_linkedl messageBits = create_c_list();
+    c_linkedl* listAdress = &messageBits; 
+
+
+
+}
+
+
 
 /*
 
@@ -164,24 +245,3 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 */
-
-void hide_message(char *filename, char *message){
-
-    // Lendo bits de frente para tras
-
-    c_linkedl messageBits = create_c_list(); 
-    c_linkedl *listAdress = &messageBits;
-    long long sizeMessage = strlen(message) + 1;
-
-    for(int i1 = 0; i1 < sizeMessage; i1++){
-        for(int i2 = 7, pos = 128; i2 >= 0; i2--, pos >>= 1){
-            insert_c_list(listAdress, create_node(1 && (pos & message[i1])));
-        }
-    }
-
-    read_png_file(filename);
-
-    
-    
-
-}
