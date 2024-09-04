@@ -91,7 +91,6 @@ void read_png_file(char *filename) {
 }
 
 void write_png_file(char *filename) {
-  int y;
 
   FILE *fp = fopen(filename, "wb");
   if(!fp) abort();
@@ -146,6 +145,10 @@ void process_png_file_hide_message(c_linkedl *messageBits) {
   char write1 = 1;
   char write0 = 255 - 1;
 
+  //printf("\n\nSTART DEBUG PROCESS HIDE\n");
+
+  //printf("Tamanho lista: %d\n", messageBits->tamanho);
+
   for(int y = 0; y < height && messageBits->tamanho; y++) {
     png_bytep row = row_pointers[y];
     for(int x = 0; x < width && messageBits->tamanho; x++) {
@@ -153,6 +156,7 @@ void process_png_file_hide_message(c_linkedl *messageBits) {
 
       for(int z = 0; z < 4 && messageBits->tamanho; z++){
         
+        //printf("%d", messageBits->inicio->informacoes.valor);
         if(messageBits->inicio->informacoes.valor == 1){
             px[z] = px[z] | write1;
         }else{
@@ -168,37 +172,61 @@ void process_png_file_hide_message(c_linkedl *messageBits) {
   }
 }
 
+char convertBitsToChar(c_linkedl *bitsMessage){
+  int convert[8] = {128, 64, 32, 16, 8, 4, 2, 1};
+  char caracter = 0;
 
-// CONTINUE AQUI
+  //printf("\n\nDEBUG CONVERTER\n");
 
+  //printf("Tamanho: %d\n", bitsMessage->tamanho);
+  //show_c_list(bitsMessage);
 
-void process_png_file_show_message(c_linkedl *messageBits) {
+  //printf("%d \n", bitsMessage->fim->informacoes.valor);
+  for(int i1 = 0; i1 <= 7 && bitsMessage->tamanho; i1++){
+    if(bitsMessage->inicio->informacoes.valor){
+      caracter += convert[i1];
+      //printf("%d ", bitsMessage->inicio->informacoes.valor);
+    }
+    del_c_list_element(bitsMessage, bitsMessage->inicio, 1);
+  }
 
-    char end = 1;
+  //printf("RESULTADO: %c\n", caracter);
+
+  return caracter;
+}
+
+void process_png_file_show_message(void) {
+
+  char end = 1;
+  c_linkedl messageBits = create_c_list();
+  c_linkedl* listAdress = &messageBits;
 
   for(int y = 0; y < height && end; y++) {
     png_bytep row = row_pointers[y];
     for(int x = 0; x < width && end; x++) {
       png_bytep px = &(row[x * 4]);
-
       for(int z = 0; z < 4 && end; z++){
         
-        if(messageBits->inicio->informacoes.valor == 1){
-            px[z] = px[z] | write1;
-        }else{
-            px[z] = px[z] & write0; 
+        insert_c_list(listAdress, create_node(1 & px[z]));
+        if(listAdress->tamanho == 8){
+          //show_c_list(listAdress);
+          char caracter = convertBitsToChar(listAdress);
+          printf("%c", caracter);
+          if(caracter == '\0'){
+            end = 0;
+          }
         }
-
-        del_c_list_element(messageBits, messageBits->inicio, 1);
 
       }
       // Do something awesome for each pixel here...
       //printf("%4d, %4d = RGBA(%3d, %3d, %3d, %3d)\n", x, y, px[0], px[1], px[2], px[3]);
     }
   }
+
+  putchar('\n');
+  kill_c_list(listAdress);
+
 }
-
-
 
 void hide_message(char *inFilename, char* outFilename, char *message){
 
@@ -209,6 +237,11 @@ void hide_message(char *inFilename, char* outFilename, char *message){
     long long sizeMessage = strlen(message) + 1;
     read_png_file(inFilename);
 
+    //printf("\n\nDEBUG HIDE MESSAGE\n");
+
+    //printf("Height: %d Width: %d sizeMessage: %lld\n", height, width, sizeMessage);
+
+
     if(sizeMessage > height * width) abort();
 
     for(int i1 = 0; i1 < sizeMessage; i1++){
@@ -217,31 +250,19 @@ void hide_message(char *inFilename, char* outFilename, char *message){
         }
     }
 
-    process_png_file(listAdress);
+    //show_c_list(listAdress);
+
+    //printf("Tamanho lista: %d", listAdress->tamanho);
+
+    //printf("END DEBUG HIDE MESSAGE\n\n");
+
+    process_png_file_hide_message(listAdress);
     write_png_file(outFilename);
 
     kill_c_list(listAdress);
 }
 
 void show_mensagem(char *filename){
-    c_linkedl messageBits = create_c_list();
-    c_linkedl* listAdress = &messageBits; 
-
-
-
+  read_png_file(filename);
+  process_png_file_show_message();
 }
-
-
-
-/*
-
-int main(int argc, char *argv[]) {
-  if(argc != 3) abort();
-
-  read_png_file(argv[1]);
-  process_png_file();
-  write_png_file(argv[2]);
-
-  return 0;
-}
-*/

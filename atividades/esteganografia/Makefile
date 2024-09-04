@@ -4,9 +4,9 @@ CFLAGS = -Wall -O2
 
 LIBS = -lpng -lz
 
-TARGET = teste
+TARGET = esteganografia
 
-SRCS = teste.c linked_list.c encap_png.c
+SRCS = esteganografia.c linked_list.c encap_png.c
 
 OBJS = $(SRCS:.c=.o)
 
