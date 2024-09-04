@@ -1,0 +1,11 @@
+Want to hide a message in a png picture?
+
+Run:
+
+./esteganografia hide pictureName.png newPictureName.png messageInfo.txt
+
+Want to show a message in a png picture?
+
+Run:
+
+./esteganografia show pictureName.png

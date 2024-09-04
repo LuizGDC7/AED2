@@ -16,19 +16,6 @@
  *
  */
 
-/*
-
-4 de tamanho?
-
-nome_arquivo hide entrada saida mensagem
-nome_arquivo show entrada
-
-hide ou show -> hide exige nome de entrada e de saida
-show -> exige apenas nome de entrada
-
-*/
-
-
 #include "encap_png.h"
 
 int main(int argc, char *argv[]) {
@@ -51,9 +38,3 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
-
-/*
-
-pngin, pngout, mensagem
-
-*/

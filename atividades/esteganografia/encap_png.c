@@ -145,10 +145,6 @@ void process_png_file_hide_message(c_linkedl *messageBits) {
   char write1 = 1;
   char write0 = 255 - 1;
 
-  //printf("\n\nSTART DEBUG PROCESS HIDE\n");
-
-  //printf("Tamanho lista: %d\n", messageBits->tamanho);
-
   for(int y = 0; y < height && messageBits->tamanho; y++) {
     png_bytep row = row_pointers[y];
     for(int x = 0; x < width && messageBits->tamanho; x++) {
@@ -156,7 +152,6 @@ void process_png_file_hide_message(c_linkedl *messageBits) {
 
       for(int z = 0; z < 4 && messageBits->tamanho; z++){
         
-        //printf("%d", messageBits->inicio->informacoes.valor);
         if(messageBits->inicio->informacoes.valor == 1){
             px[z] = px[z] | write1;
         }else{
@@ -176,21 +171,12 @@ char convertBitsToChar(c_linkedl *bitsMessage){
   int convert[8] = {128, 64, 32, 16, 8, 4, 2, 1};
   char caracter = 0;
 
-  //printf("\n\nDEBUG CONVERTER\n");
-
-  //printf("Tamanho: %d\n", bitsMessage->tamanho);
-  //show_c_list(bitsMessage);
-
-  //printf("%d \n", bitsMessage->fim->informacoes.valor);
   for(int i1 = 0; i1 <= 7 && bitsMessage->tamanho; i1++){
     if(bitsMessage->inicio->informacoes.valor){
       caracter += convert[i1];
-      //printf("%d ", bitsMessage->inicio->informacoes.valor);
     }
     del_c_list_element(bitsMessage, bitsMessage->inicio, 1);
   }
-
-  //printf("RESULTADO: %c\n", caracter);
 
   return caracter;
 }
@@ -218,8 +204,6 @@ void process_png_file_show_message(void) {
         }
 
       }
-      // Do something awesome for each pixel here...
-      //printf("%4d, %4d = RGBA(%3d, %3d, %3d, %3d)\n", x, y, px[0], px[1], px[2], px[3]);
     }
   }
 
@@ -228,38 +212,36 @@ void process_png_file_show_message(void) {
 
 }
 
-void hide_message(char *inFilename, char* outFilename, char *message){
+void hide_message(char *inFilename, char* outFilename, char *inText){
 
-    // Lendo bits de frente para tras
+    FILE *info = fopen(inText, "r");
+    if(info == NULL) abort();
+    fseek(info, 0, SEEK_END);
+    long long sizeMessage = ftell(info);
+    fseek(info, 0, SEEK_SET);
+    char *message = (char*) malloc(sizeMessage + 1);
+    if(message == NULL) abort();
+    fread(message, 1, sizeMessage, info);
+    message[sizeMessage] = '\0';
 
     c_linkedl messageBits = create_c_list(); 
     c_linkedl* listAdress = &messageBits;
-    long long sizeMessage = strlen(message) + 1;
     read_png_file(inFilename);
-
-    //printf("\n\nDEBUG HIDE MESSAGE\n");
-
-    //printf("Height: %d Width: %d sizeMessage: %lld\n", height, width, sizeMessage);
-
 
     if(sizeMessage > height * width) abort();
 
-    for(int i1 = 0; i1 < sizeMessage; i1++){
+    for(int i1 = 0; i1 < sizeMessage + 1; i1++){
         for(int i2 = 7, pos = 128; i2 >= 0; i2--, pos >>= 1){
             insert_c_list(listAdress, create_node(1 && (pos & message[i1])));
         }
     }
 
-    //show_c_list(listAdress);
-
-    //printf("Tamanho lista: %d", listAdress->tamanho);
-
-    //printf("END DEBUG HIDE MESSAGE\n\n");
-
     process_png_file_hide_message(listAdress);
     write_png_file(outFilename);
 
     kill_c_list(listAdress);
+    fclose(info);
+    free(message);
 }
 
 void show_mensagem(char *filename){
