@@ -2,7 +2,7 @@ Want to hide a message in a png picture?
 
 Run:
 
-./esteganografia hide pictureName.png newPictureName.png messageInfo.txt
+./esteganografia hide pictureName.png newPictureName.png messageInfo.someExtension
 
 Want to show a message in a png picture?
 

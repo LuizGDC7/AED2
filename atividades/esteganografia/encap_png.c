@@ -4,6 +4,8 @@
  *
  * Modified by Yoshimasa Niwa to make it much simpler
  * and support all defined color_type.
+ * 
+ * Modified by Luiz Catulio to allow messages to be hidden inside png files 
  *
  * To build, use the next instruction on OS X.
  * $ brew install libpng
@@ -118,10 +120,6 @@ void write_png_file(char *filename) {
   );
   png_write_info(png, info);
 
-  // To remove the alpha channel for PNG_COLOR_TYPE_RGB format,
-  // Use png_set_filler().
-  //png_set_filler(png, 0, PNG_FILLER_AFTER);
-
   if (!row_pointers) abort();
 
   png_write_image(png, row_pointers);
@@ -161,7 +159,6 @@ void process_png_file_hide_message(c_linkedl *messageBits) {
         del_c_list_element(messageBits, messageBits->inicio, 1);
 
       }
-      // Do something awesome for each pixel here...
       //printf("%4d, %4d = RGBA(%3d, %3d, %3d, %3d)\n", x, y, px[0], px[1], px[2], px[3]);
     }
   }
@@ -195,7 +192,6 @@ void process_png_file_show_message(void) {
         
         insert_c_list(listAdress, create_node(1 & px[z]));
         if(listAdress->tamanho == 8){
-          //show_c_list(listAdress);
           char caracter = convertBitsToChar(listAdress);
           printf("%c", caracter);
           if(caracter == '\0'){

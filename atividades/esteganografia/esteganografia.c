@@ -1,30 +1,19 @@
-/*
- * A simple libpng example program
- * http://zarb.org/~gc/html/libpng.html
- *
- * Modified by Yoshimasa Niwa to make it much simpler
- * and support all defined color_type.
- *
- * To build, use the next instruction on OS X.
- * $ brew install libpng
- * $ clang -lz -lpng16 libpng_test.c
- *
- * Copyright 2002-2010 Guillaume Cottenceau.
- *
- * This software may be freely redistributed under the terms
- * of the X11 license.
- *
+
+/**
+ * Program designed by Luiz Catulio to hide messages inside png images
  */
 
 #include "encap_png.h"
 
 int main(int argc, char *argv[]) {
 
+/*
 
   printf("DEBUG\n");
   for(int i1 = 0; i1 < argc; i1++){
     printf("%s\n", argv[i1]);
   }
+*/
 
   if(!strcmp(argv[1], "hide")){
     if(argc != 5) abort();
