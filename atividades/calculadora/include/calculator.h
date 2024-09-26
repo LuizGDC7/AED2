@@ -17,7 +17,7 @@ typedef struct _data{
     c_linkedl* adress;
 } data;
 
-void create_calculadora();
+void create_calculadora(calculadora* calc);
 
 void create_data(data *dados);
 

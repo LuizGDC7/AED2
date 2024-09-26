@@ -182,7 +182,7 @@ void show_c_list(c_linkedl *list){
         node *temporario = (list) -> inicio;
         printf("Elementos da lista:");
         for(int c = 0; c < (list) -> tamanho; c++){
-            printf(" %lf | %c", temporario -> informacoes.valorDouble, temporario->informacoes.valorChar);
+            printf(" [%.2lf ,%c]", temporario->informacoes.valorDouble, temporario->informacoes.valorChar);
             temporario = temporario -> sucessor;
         }
         putchar('\n');
