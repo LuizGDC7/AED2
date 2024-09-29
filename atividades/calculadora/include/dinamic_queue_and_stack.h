@@ -25,18 +25,4 @@ void pop_stack(dstack *stack);
 
 node *peek_stack(dstack *stack);
 
-void create_queue(dqueue *endereco);
-
-void kill_queue(dqueue *queue);
-
-void enqueue(dqueue *queue, node *endereco);
-
-void unqueue(dqueue *queue);
-
-node *peek_queue(dqueue *queue);
-
-int menu_queue(dqueue *queue);
-
-int menu_stack(dstack *stack);
-
 #endif

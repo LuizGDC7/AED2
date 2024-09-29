@@ -8,7 +8,7 @@ typedef struct _dados{
 } dados;
 
 typedef struct _node{
-    dados informacoes;
+    dados *informacoes;
     struct _node *sucessor;
     struct _node *predecessor; 
 } node;

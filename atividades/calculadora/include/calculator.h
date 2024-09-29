@@ -4,23 +4,30 @@
 
 #include "linked_list.h"
 #include "dinamic_queue_and_stack.h"
+#include <stdlib.h>
+#include <string.h>
 
 #define ll long long
 
 typedef struct _calculadora{
-    dstack valores;
-    dstack operadores;
+    dstack *valores;
+    dstack *operadores;
 } calculadora;
 
-typedef struct _data{
-    c_linkedl vals;
-    c_linkedl* adress;
-} data;
+typedef c_linkedl data;
 
-void create_calculadora(calculadora* calc);
+calculadora* create_calculadora();
 
-void create_data(data *dados);
+data* create_data();
 
-void read_data(data *dados, char* leitura);
+void kill_data(data* x);
+
+void kill_calculadora(calculadora *calc);
+
+void read_data(data *dadosLidos, char* leitura);
+
+void calcular(calculadora* calc);
+
+double solve(data *dadosLidos);
 
 #endif

@@ -1,26 +1,50 @@
-# Variáveis do Makefile
-CC = gcc                  # Compilador
-CFLAGS = -Iinclude -Wall -lm # Flags de compilação (-I para incluir cabeçalhos)
-LDFLAGS = -Llib  # Flags de linkagem (-L para localizar bibliotecas, -l para a biblioteca)
-OBJ = src/main.o src/calculator.o src/linked_list.o src/dinamic_queue_and_stack.o # Objetos que serão criados a partir dos arquivos .c
-TARGET = calculadora      # Nome do executável final
+# Compilador e flags
+CC = gcc
+CFLAGS = -Wall -Wextra -O2 -I$(INCLUDE_DIR)
+LDFLAGS = -L$(LIB_DIR)
+LIBS = -lm
 
-# Regra principal (padrão). O alvo será o nome do programa.
-all: $(TARGET)
+# Diretórios
+INCLUDE_DIR = include
+SRC_DIR = src
+OBJ_DIR = obj
+LIB_DIR = lib
+BIN_DIR = bin
 
-# Regra para compilar o programa final
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) $(LDFLAGS) -o $(TARGET)
+# Lista de fontes e objetos
+SOURCES = $(wildcard $(SRC_DIR)/*.c)
+OBJECTS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SOURCES))
+EXECUTABLE = $(BIN_DIR)/calculadora
 
-# Regra genérica para compilar os arquivos .c em .o (objetos)
-%.o: %.c
+# Regra padrão
+all: $(EXECUTABLE)
+
+# Regra para linkar o executável
+$(EXECUTABLE): $(OBJECTS) | $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) $(LIBS)
+
+# Regra para compilar arquivos objeto
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Limpa arquivos temporários (objetos e executáveis)
+# Criação de diretórios se não existirem
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+# Alvo clean
+.PHONY: clean
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
-# Rodar o programa (opcional)
-run: $(TARGET)
-	./$(TARGET)
+# Dependências (opcional, mas recomendado)
+-include $(OBJECTS:.o=.d)
 
+# Regra para gerar dependências
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -MMD -c $< -o $@
+
+run:
+	./bin/calculadora < entrada.txt > saida.txt
