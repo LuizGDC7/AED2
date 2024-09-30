@@ -7,9 +7,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* preprocess(char *input, int maxRows);
+char* preprocesso(char *input, int maxRows);
 
-ll coluna(char* val);
+char* transcicao(double **matrix, int maxRows, char* input);
+
+char* leituraSuja(double **matrix, int qtdLinhas, int qtdColunas);
 
 
 

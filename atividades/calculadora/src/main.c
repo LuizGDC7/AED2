@@ -5,28 +5,38 @@
 int main(){
     //data *valores = create_data();
     //calculadora* calc = create_calculadora();
-    char leitura[10000];
-    scanf(" %s[^\n]", leitura);
 
-    char* preprocessado = preprocess(leitura, 26);
+    int qtdLinhas, qtdColunas;
+    printf("Quantas linhas [objetos diferentes] voce usara?\n>");
+    scanf(" %d%*c", &qtdLinhas);
+    printf("Quantas colunas [informacao por objeto] voce usara?\n>");
+    scanf(" %d%*c", &qtdColunas);
 
-    //printf("%s", preprocessado);
-    char * mundoDividido = strtok(preprocessado, "\n");;
-
-    while(mundoDividido != NULL){
-        int tamanho = strlen(mundoDividido);
-        printf("Linha: %s ----- Tamanho: %lld\n", mundoDividido, tamanho);
-        if(tamanho > 1) 
-            //printf("%s possui valor %d", coluna(mundoDividido));
-
-
-        mundoDividido = strtok(NULL, "\n");
+    double** matrix = NULL;
+    matrix = (double**) malloc((qtdLinhas + 5) * sizeof(double*));
+    for(int c = 0; c < qtdLinhas; c++){
+        matrix[c] = (double*) malloc((qtdColunas + 5) * sizeof(double));
     }
-    
+
+    char *leitura = leituraSuja(matrix, qtdLinhas, qtdColunas);
+
+    //scanf(" \n%[^\n]", leitura);
+
+    //printf("Leitura: \n%s\n", leitura);
+
+    char* preprocessado = preprocesso(leitura, 26);
+
+    printf("preprocessado:\n%s\n", preprocessado);
+
+    char* transcrito = transcicao(matrix, qtdLinhas, preprocessado);
+
+    printf("\n%s\n", transcrito);
+
     /*
     read_data(valores, leitura);
 
     show_c_list(valores);
+    
 
     printf("\n VALUE IS: %.3lf\n", solve(valores));
 

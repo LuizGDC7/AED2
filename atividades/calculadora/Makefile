@@ -47,4 +47,4 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 run:
-	./bin/calculadora < entrada.txt > saida.txt
+	./bin/calculadora
