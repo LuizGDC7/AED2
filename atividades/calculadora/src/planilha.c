@@ -4,18 +4,24 @@ char* preprocesso(char *input, int qtdLinhas){
     if(input == NULL)
         return NULL;
 
+    //printf("Input:\n%s\n", input);
+
     char validChar[] = {'(', ')', '/', '*', '+', '-'};
     int sizeValidChar = strlen(validChar);
 
     ll sizeInput = strlen(input);
     char* nova = malloc(5 * sizeInput * sizeof(char));
     char buffer[20];
+    strcpy(buffer, "");
     int start = 0;
 
     for(int c = 0; c < sizeInput; c++){
 
+        //printf("Caractere atual: %2c start: %2d buffer: %5s\n", input[c], start, buffer);
+
         if(input[c] >= 'A' && input[c] <= 'A' + qtdLinhas - 1){
             start = 1;
+            strcpy(buffer,"");
             sprintf(buffer, "%c", input[c]);
             //strcat(buffer, input[c]);
             continue;
@@ -38,11 +44,16 @@ char* preprocesso(char *input, int qtdLinhas){
             if(input[c] >= '0' && input[c] <= '9'){
                 start = 1;
                 strcpy(buffer, "");
-                sprintf(buffer, "%s%c", buffer, input[c]);
+                sprintf(buffer, "%c", input[c]);
+                 if(start && c == sizeInput - 1){
+                    strcat(nova, buffer);
+                }
+                continue;
             }
 
             for(int d = 0; d < sizeValidChar; d++){
                 if(input[c] == validChar[d]){
+                    strcpy(buffer, "");
                     sprintf(buffer, "%c\n", input[c]);
                     strcat(nova, buffer);  
                     break;      
@@ -122,7 +133,7 @@ char* leituraSuja(double **matrix, int qtdLinhas, int qtdColunas){
 
     for(int c = 0; c < qtdLinhas; c++){
         for(int d = 0; d < qtdColunas; d++){
-            printf("Insira valor do item %c%d\n", 'A' + c, d);
+            printf("Insira valor do item %c%d: \n", 'A' + c, d);
             scanf(" %lf%*c", &matrix[c][d]);
         }
     }
