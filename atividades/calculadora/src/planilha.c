@@ -11,6 +11,7 @@ char* preprocesso(char *input, int qtdLinhas){
     char* nova = malloc(5 * sizeInput * sizeof(char));
     char buffer[20];
     int start = 0;
+
     for(int c = 0; c < sizeInput; c++){
 
         if(input[c] >= 'A' && input[c] <= 'A' + qtdLinhas - 1){
@@ -31,11 +32,15 @@ char* preprocesso(char *input, int qtdLinhas){
             }
         }
 
-        if(start && c == sizeInput - 1){
-            strcat(nova, buffer);
-        }
 
         if(!start){
+
+            if(input[c] >= '0' && input[c] <= '9'){
+                start = 1;
+                strcpy(buffer, "");
+                sprintf(buffer, "%s%c", buffer, input[c]);
+            }
+
             for(int d = 0; d < sizeValidChar; d++){
                 if(input[c] == validChar[d]){
                     sprintf(buffer, "%c\n", input[c]);
@@ -44,6 +49,10 @@ char* preprocesso(char *input, int qtdLinhas){
                 }
             }
             
+        }
+
+        if(start && c == sizeInput - 1){
+            strcat(nova, buffer);
         }
     }
 
@@ -93,13 +102,14 @@ char* transcicao(double **matrix, int qtdLinhas, char* input){
         if(!start){
             if(input[c] == '\n')
                 continue;
-
+            
+            /*
             if(input[c] >= '0' && input[c] <= '*'){
                 pureNumber = 1;
                 val = 0;
                 val += ;
             }
-            
+            */
 
             strcpy(buffer, "");
             sprintf(buffer, "%c", input[c]);
