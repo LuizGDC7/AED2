@@ -1,0 +1,45 @@
+
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
+1. Inserir número
+2. Mostrar em ordem
+-1. Sair
+Escolha uma opção: Digite o número para inserir: 
