@@ -1,0 +1,72 @@
+#include <stdio.h>
+int main(){
+ 
+    int largura;
+    int altura;
+    int borda;
+    int valorborda;
+ 
+    scanf("%d%d%d%d",&largura,&altura,&borda,&valorborda);
+ 
+    int i;
+    int j;
+    int altura1 = altura;
+    int largura1 = largura;
+ 
+    int matriz[altura][largura];
+ 
+    for(i=0;i<altura;i++){
+        for(j=0;j<largura;j++){
+ 
+            matriz[i][j] = 0;
+        }
+    }
+ 
+    j=0;
+ 
+    for(i=0;i<altura;i++){
+ 
+        matriz[i][j] = valorborda;
+    }
+ 
+    for(i=altura-1;i>0;i--){
+ 
+        matriz[i][largura-1] = valorborda;
+ 
+    }
+ 
+    i = 0;
+    j = 1;
+ 
+    while(j<largura){
+ 
+        matriz[i][j] = valorborda;
+ 
+        j++;
+    }
+ 
+    i = 0;
+    j = 1;
+ 
+    while(j<largura){
+ 
+        matriz[largura-1][j] = valorborda;
+ 
+        j++;
+    }
+ 
+    printf("P2\n");
+    printf("%d %d\n",altura1,largura1);
+    printf("255\n");
+ 
+    for(i=0;i<altura;i++){
+        for(j=0;j<largura;j++){
+ 
+            printf("%d ",matriz[i][j]);
+        }
+ 
+        printf("\n");
+    }
+ 
+return 0;
+}
