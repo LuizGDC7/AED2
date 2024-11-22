@@ -1,0 +1,5 @@
+type make to build
+
+to run, type:
+
+./main filename.c

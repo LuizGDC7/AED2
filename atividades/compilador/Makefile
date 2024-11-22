@@ -3,7 +3,7 @@ EXEC = main
 
 # Compilador e flags de compilação
 CC = gcc
-CFLAGS = -Iinclude -Wall -Wextra -Werror
+CFLAGS =
 
 # Diretórios
 SRC_DIR = implementation
@@ -41,4 +41,4 @@ cleanall: clean
 	rm -rf $(OBJ_DIR)
 
 run: 
-	./main in.txt > out.txt
+	./main in.txt

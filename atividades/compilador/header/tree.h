@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <regex.h>
+#include "./../header/tokenizer.h"
 
 // Estrutura do nó da árvore
 typedef struct func{
@@ -60,9 +62,42 @@ void showPairs(primitiveTree** tree); // mostra string - nó na tree
 
 void startPrimitiveTree(primitiveTree** tree); // inicia a primitiveTree
 
-void insertInPrimitiveType(primitiveTree** tree, char* typeOfTree, char* value);
+void insertInPrimitiveType(primitiveTree** tree, char* typeOfTree, char* value); // Insere variáveis e funções em seus respectivos tipos primitivos
 
-void showPrimitiveTree(primitiveTree** tree);
+void showPrimitiveTree(primitiveTree** tree); // Mostra 
 
+void insertFunctionInPrimitiveType(primitiveTree** tree, char* typeOfTree, char* name, char* arguments, char* body);
+
+No* insere2(No* raiz, const char* nome, char* arguments, char* body);
+
+No* cria_no2(const char* valor, char* arguments, char* body);
+
+void insereEncap2(No** raiz, const char* name, char* arguments, char* body);
+
+int verificar_formatacao_funcao(const char *declaracao);
+
+int verificar_declaracao_main(const char *declaracao);
+
+int declaration(primitiveTree** primitive, char* primitiveType, rowInfo* info, int start);
+
+void warningAndAbortion(char* warn);
+
+int verificar_sintaxe_printf(const char *declaracao);
+
+int verificar_sintaxe_scanf(const char *declaracao);
+
+int verificar_sintaxe_if_else(const char *declaracao);
+
+int verificar_sintaxe_while(const char *declaracao);
+
+int verificar_sintaxe_for(const char *declaracao);
+
+void preprocess(primitiveTree** primitive, rowInfo* info);
 
 #endif
+
+/*
+
+08/09/1951
+
+*/

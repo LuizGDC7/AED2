@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 typedef struct rowInfo{
     long size;
@@ -26,47 +27,3 @@ matrixInfo* tokenizer(rowInfo *input);
 
 #endif
 
-/*
-
-- Verificar blocos { } [ ] ( )  " "    ' ' => percorrer e por em pilha
-- Sintaxe dos comandos ??? 
-+ include => se encontrar, adicionar o resto da linha em uma string
-+ main => separar
-+ printf => separar
-+ scanf => separar
-+ if else => separar e colocar o resultado numa pilha
-+ for ???
-+ while => separar
-+ switch case => FILHO DA PUTA
-- Expressões ????
-*/
-
-/*
-
-Algumas regras para garantir que eu consiga fazer meu programa funcionar:
-
-A declaração das funções precisa ser completa:
-
-tipo nome(argumento){ coisas }
-
-if(){}
-else{}
-while(){}
-
-vou separar em duas partes: declaração por meio de tipo e uso. Agora vou precisar dos dicionários
-
-Não vou verificar o tipo das variáveis, mas preciso verificar se a quantidade está ok dentro das funções
-
-*/
-
-/*
-
-Vou ter meus tipos primitivos e suas árvores, vou usar elas para inserção e para verificar existência.
-
-
-tipos -> ("tipo", endereço da árvore do tipo)
-
-Função -> armazenar nome das variáveis, e quais são as variáveis internas. Serão armazenadas na declaração
-
-
-*/

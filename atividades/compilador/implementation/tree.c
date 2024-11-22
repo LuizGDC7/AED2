@@ -1,4 +1,5 @@
 #include "./../header/tree.h"
+#include "./../header/tokenizer.h"
 
 No* cria_no(const char* valor) {
     No* novo_no = (No*)malloc(sizeof(No));
@@ -11,10 +12,38 @@ No* cria_no(const char* valor) {
     return novo_no;
 }
 
+No* cria_no2(const char* valor, char* arguments, char* body) {
+    No* novo_no = (No*)malloc(sizeof(No));
+    if (novo_no == NULL) {
+        perror("Erro ao alocar memória para o nó");
+        return NULL;
+    }
+    novo_no->valor = strdup(valor);  // Copia o valor da string
+    novo_no->esquerda = novo_no->direita = NULL;
+    novo_no->isFunction = 1;
+    novo_no->functionStorage.arguments = arguments;
+    novo_no->functionStorage.body = body;
+    return novo_no;
+}
+
 
 No* insere(No* raiz, const char* valor) {
     if (raiz == NULL) {
         return cria_no(valor);
+    }
+
+    if (strcmp(valor, raiz->valor) < 0) {
+        raiz->esquerda = insere(raiz->esquerda, valor);
+    } else if (strcmp(valor, raiz->valor) > 0) {
+        raiz->direita = insere(raiz->direita, valor);
+    }
+    return raiz;
+}
+
+
+No* insere2(No* raiz, const char* valor, char* arguments, char* body) {
+    if (raiz == NULL) {
+        return cria_no2(valor, arguments, body);
     }
 
     if (strcmp(valor, raiz->valor) < 0) {
@@ -172,11 +201,11 @@ void deletePrimitiveTree(primitiveTree** tree){
     long tree_size = (*tree)->size;
     pairTree* pair = (*tree)->tree;
     for(int c = 0; c < tree_size; c++){
-        if(pair->string != NULL){
-            free(pair->string);
+        if(pair[c].string != NULL){
+            free(pair[c].string);
         }
-        if(pair->raiz != NULL){
-            libera_arvore(pair->raiz);
+        if(pair[c].raiz != NULL){
+            libera_arvore(pair[c].raiz);
         }
     }
 }
@@ -202,8 +231,8 @@ void showPairs(primitiveTree** tree){
 void startPrimitiveTree(primitiveTree** tree){
     createPrimitiveTree(tree);
     //printf("%p\n", *tree);
-    char* valores[]  = {"int", "long", "double", "float", "int*", "long*", "double*", "char", "char*", "long long", "long long*"};
-    int size = 11;
+    char* valores[]  = {"int", "long", "double", "float", "int*", "long*", "double*", "char", "char*", "long long", "long long*", "#include", "for", "while", "switch", "main", "printf", "scanf", "if", "else", "void"};
+    int size = 21;
     insertPrimitiveTree(*tree, size, valores);
     //showPairs(tree);
     //showPrimitiveTree(tree);
@@ -224,6 +253,26 @@ void insertInPrimitiveType(primitiveTree** tree, char* typeOfTree, char* value){
     }
 
     insereEncap(correctTree, value);
+}
+
+void insereEncap2(No** raiz, const char* name, char* arguments, char* body){
+    *raiz = insere2(*raiz, name, arguments, body);
+
+}
+
+void insertFunctionInPrimitiveType(primitiveTree** tree, char* typeOfTree, char* name, char* arguments, char* body){
+    if(tree == NULL){
+        printf("NULL at inserInPrimitiveType");
+    }
+
+    No** correctTree = findPrimitiveType(*tree, typeOfTree);
+    if(correctTree == NULL){
+        printf("Tree not found at inserInPrimitiveType");
+        return;
+    }
+
+    insereEncap2(correctTree,name, arguments, body);
+
 }
 
 void showPrimitiveTree(primitiveTree** tree){

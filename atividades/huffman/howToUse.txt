@@ -1,0 +1,11 @@
+Compile normalmente usando:
+
+gcc huffmanF.c -o main
+
+Para comprimir, execute usando:
+
+./main comprimir arquivoEntrada.extensao arquivoSaida.extensao 
+
+Para descomprimir, execute usando:
+
+./main descomprimir arquivoEntrada.extensao arquivoSaida.extensao
