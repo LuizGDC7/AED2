@@ -1,6 +1,6 @@
 #ifndef __HASHT__
 
-#define __HASH__
+#define __HASHT__
 
 #include "./bintree.h"
 

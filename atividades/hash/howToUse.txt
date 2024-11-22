@@ -1,0 +1,8 @@
+To compile, type:
+
+make
+
+TO run, type:
+
+./main inputFile.txt
+

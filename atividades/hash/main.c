@@ -45,7 +45,6 @@ int main(int argc, char *argv[]){
 
     printf("\n\nDo total de %d posicoes:\n%d sao ocupadas\n%d sao desocupadas\n", tabela.size, ocupado, tabela.size - ocupado);
 
-    
     destroyHash(&tabela);
     fclose(arquivo);
 
